@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from sqlalchemy import select, insert
 from sqlalchemy.orm import Session
-from models.user import User,Program  # Asegúrate de importar tus modelos correctamente
+from models.user import User,Programs
 from schemas.User import User as UserSchema
 from schemas.Program import Program as ProgramSchema
 from config.db import engine
@@ -34,13 +34,12 @@ def get_user(user_id: int):
 @user_router.post('/programs')
 def insert_program(program: ProgramSchema):
     with Session(engine) as session:
-        new_program = Program(id_program=program.id, programa=program.program)
+        new_program = Programs(id_program=program.id, programa=program.program)
         try:
-            session.execute(insert(Program).values(new_program))
+            session.execute(insert(Programs).values(new_program))
             session.commit()
             return new_program
         except Exception as e:
             print(e)
             raise HTTPException(status_code=400, detail="Program already exists")
 
-# Nota: Asegúrate de que las importaciones y nombres de clases sean coherentes con tu proyecto.
