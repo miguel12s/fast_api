@@ -8,4 +8,7 @@ class User(BaseModel):
     email:str
     password:str
 
+class Facultie(BaseModel):
+    id:Optional[int]
+    faculty:str
 

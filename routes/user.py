@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from sqlalchemy import select, insert
 from sqlalchemy.orm import Session
-from models.user import User,Programs
+from models.models import User,Programs
 from schemas.User import User as UserSchema
 from schemas.Program import Program as ProgramSchema
 from config.db import engine
@@ -12,7 +12,7 @@ user_router = APIRouter()
 def get_users():
     with Session(engine) as session:
         users = session.execute(select(User))
-        user_list = [{"id": user.id, "name": user.name, "email": user.email} for user in users]
+        user_list = [{"id_usuario": user.id, "name": user.name, "email": user.email} for user in users]
         return user_list
 
 @user_router.post('/users')
