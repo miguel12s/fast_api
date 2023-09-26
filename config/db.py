@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker,Session
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("mysql+pymysql://root:@localhost:3306/ejemplo")
+engine = create_engine("mysql+pymysql://root:@localhost:3306/bd_copia")
 sessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 conn=engine.connect()
