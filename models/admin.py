@@ -1,4 +1,5 @@
 from config.conexion import conexion
+from schemas.Faculties import Faculties
 
 bd = conexion()
 
@@ -20,3 +21,13 @@ class ModelUser():
             content = {}
 
         return facultades
+    
+    def createFacultie(facultie:Faculties):
+        try:
+            cursor=bd.cursor()
+            cursor.execute("insert into facultades (facultad) values(%s)",(facultie.faculty,))
+            bd.commit()
+            return facultie
+        except (Exception) as e:
+            print(e)
+            return {"error":"the facultie existed in the system"}
